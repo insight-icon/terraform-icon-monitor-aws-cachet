@@ -88,3 +88,13 @@ resource "aws_route53_record" "this" {
   ttl     = "300"
   records = [join("", aws_instance.this.*.public_ip)]
 }
+
+resource "aws_route53_record" "www" {
+  zone_id = join("", data.aws_route53_zone.this.*.id)
+  name    = "www"
+  type    = "CNAME"
+  ttl     = "5"
+
+  set_identifier = "dev"
+  records        = aws_route53_record.this.records
+}

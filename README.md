@@ -13,10 +13,9 @@ For Terraform v0.12.0+
 
 ## Usage
 
-```
+```hcl-terraform
 module "this" {
-    source = "github.com/insight-icon/terraform-icon-monitor-aws-cachet"
-
+source = "github.com/insight-icon/terraform-icon-monitor-aws-cachet"
 }
 ```
 ## Examples

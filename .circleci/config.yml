@@ -25,5 +25,5 @@ workflows:
     jobs:
       - test:
           context:
-            aws-ci-1
+            icon-monitor-aws
   version: 2

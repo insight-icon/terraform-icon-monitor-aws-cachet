@@ -7,5 +7,5 @@ output "public_ip" {
 }
 
 output "fqdn" {
-  value = aws_route53_record.this.fqdn
+  value = join("", aws_route53_record.this.*.fqdn)
 }

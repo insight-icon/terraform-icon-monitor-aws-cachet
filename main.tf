@@ -68,7 +68,7 @@ module "ansible" {
 
   requirements_file_path = "${path.module}/ansible/requirements.yml"
 
-  module_depends_on = [aws_route53_record.this.id]
+  module_depends_on = [join("", aws_route53_record.this.*.id)]
 }
 
 locals {
@@ -81,6 +81,8 @@ data "aws_route53_zone" "this" {
 }
 
 resource "aws_route53_record" "this" {
+  count = var.root_domain_name != "" ? 1 : 0
+
   zone_id = join("", data.aws_route53_zone.this.*.zone_id)
 
   name    = local.fqdn
@@ -90,11 +92,25 @@ resource "aws_route53_record" "this" {
 }
 
 resource "aws_route53_record" "www" {
-  zone_id = join("", data.aws_route53_zone.this.*.id)
-  name    = "www"
-  type    = "CNAME"
-  ttl     = "5"
+  count = var.root_domain_name != "" ? 1 : 0
 
-  set_identifier = "dev"
-  records        = aws_route53_record.this.records
+  zone_id = join("", data.aws_route53_zone.this.*.zone_id)
+
+  name    = "www.${local.fqdn}"
+  type    = "A"
+  ttl     = "300"
+  records = [join("", aws_instance.this.*.public_ip)]
 }
+
+//resource "aws_route53_record" "www" {
+//  count = var.root_domain_name != "" ? 1 : 0
+//
+//  zone_id = join("", data.aws_route53_zone.this.*.id)
+//  name    = "www"
+//  type    = "CNAME"
+//  ttl     = "5"
+//
+//  set_identifier = "dev"
+//  records        = join("", aws_route53_record.this.*.records)
+//}
+

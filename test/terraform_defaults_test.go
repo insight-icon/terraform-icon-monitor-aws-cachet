@@ -50,7 +50,7 @@ func configureTerraformOptions(t *testing.T, exampleFolder string) (*terraform.O
 		panic(err)
 	}
 
-	err := ioutil.WriteFile(publicKeyPath, []byte(keyPair.PublicKey), 0644)
+	err = ioutil.WriteFile(publicKeyPath, []byte(keyPair.PublicKey), 0644)
 	if err != nil {
 		panic(err)
 	}

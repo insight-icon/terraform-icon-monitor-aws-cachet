@@ -2,27 +2,13 @@ resource "random_pet" "this" {
   length = 2
 }
 
-module "label" {
-  source = "github.com/robc-io/terraform-null-label.git?ref=0.16.1"
-
-  name = var.name
-
-  tags = {
-    Terraform = true
-    VpcType   = var.vpc_type
-  }
-
-  environment = var.environment
-  namespace   = var.namespace
-}
-
 data "aws_caller_identity" "this" {}
 
 resource "aws_s3_bucket" "backend" {
   count  = var.create ? 1 : 0
   bucket = "logs-${data.aws_caller_identity.this.account_id}"
   acl    = "private"
-  tags   = module.label.tags
+  tags   = var.tags
 }
 
 module "ami" {
@@ -30,7 +16,7 @@ module "ami" {
 }
 
 resource "aws_key_pair" "this" {
-  public_key = var.public_key
+  public_key = file(var.public_key_path)
 }
 
 resource "aws_instance" "this" {

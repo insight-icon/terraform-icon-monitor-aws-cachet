@@ -50,10 +50,11 @@ No issue is creating limit on this module.
 | network\_name | The network name, ie kusama / mainnet | `string` | `"testnet"` | no |
 | owner | Owner of the infrastructure | `string` | `""` | no |
 | private\_key\_path | Path to the private ssh key | `string` | n/a | yes |
-| public\_key | Public ssh key | `string` | n/a | yes |
+| public\_key\_path | Public ssh key | `string` | n/a | yes |
 | root\_domain\_name | The root domain | `string` | `""` | no |
 | security\_group\_id | The sg to deploy into | `string` | n/a | yes |
 | subnet\_id | The subnet id to deploy into | `string` | n/a | yes |
+| tags | Tags | `map(string)` | `{}` | no |
 | vpc\_type | The type of vpc | `string` | `"monitoring"` | no |
 
 ## Outputs

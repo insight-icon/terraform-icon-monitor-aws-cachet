@@ -12,7 +12,7 @@ variable "username" {
 variable "password" {
   default = "hunter21"
 }
-variable "public_key" {}
+variable "public_key_key" {}
 variable "private_key_path" {}
 
 module "network" {
@@ -38,7 +38,7 @@ module "defaults" {
   db_username = var.username
 
   private_key_path  = var.private_key_path
-  public_key        = var.public_key
+  public_key        = var.public_key_key
   security_group_id = module.network.cachet_security_group_id
   subnet_id         = module.network.public_subnets[0]
 

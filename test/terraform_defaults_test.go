@@ -43,8 +43,14 @@ func configureTerraformOptions(t *testing.T, exampleFolder string) (*terraform.O
 	keyPair := aws.CreateAndImportEC2KeyPair(t, "us-east-1", keyPairName)
 
 	privateKeyPath := path.Join(exampleFolder, keyPairName)
+	publicKeyPath := path.Join(exampleFolder, fmt.Sprintf("%s.pub", uniqueID))
 
 	err := ioutil.WriteFile(privateKeyPath, []byte(keyPair.PrivateKey), 0600)
+	if err != nil {
+		panic(err)
+	}
+
+	err := ioutil.WriteFile(publicKeyPath, []byte(keyPair.PublicKey), 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -54,7 +60,7 @@ func configureTerraformOptions(t *testing.T, exampleFolder string) (*terraform.O
 	terraformOptions := &terraform.Options{
 		TerraformDir: exampleFolder,
 		Vars: map[string]interface{}{
-			"public_key":    keyPair.PublicKey,
+			"public_key_path": publicKeyPath,
 			"private_key_path": privateKeyPath,
 		},
 	}

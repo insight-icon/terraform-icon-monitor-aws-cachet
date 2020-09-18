@@ -47,6 +47,12 @@ variable "network_name" {
   default     = "testnet"
 }
 
+variable "tags" {
+  description = "Tags"
+  default     = {}
+  type        = map(string)
+}
+
 variable "owner" {
   description = "Owner of the infrastructure"
   type        = string
@@ -58,7 +64,7 @@ variable "private_key_path" {
   type        = string
 }
 
-variable "public_key" {
+variable "public_key_path" {
   description = "Public ssh key"
   type        = string
 }

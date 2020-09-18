@@ -1,2 +1,3 @@
 username: cachet
 group_name: cachet
+enable_icon_network_exporter: true

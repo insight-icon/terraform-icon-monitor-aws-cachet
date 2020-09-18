@@ -1,0 +1,26 @@
+[Unit]
+Description=dockprom docker-compose.yml startup
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+
+User={{ username }}
+Group={{ group_name }}
+
+# Remove old containers, images and volumes
+ExecStartPre=/usr/local/bin/docker-compose -f /home/prom/dockprom/docker-compose.yml down -v
+ExecStartPre=/usr/local/bin/docker-compose -f /home/prom/dockprom/docker-compose.yml rm -fv
+ExecStartPre=/usr/local/bin/docker-compose -f /home/prom/dockprom/docker-compose.yml build
+
+RemainAfterExit=yes
+StandardError=null
+StandardOutput=null
+WorkingDirectory=/home
+
+ExecStart=/usr/local/bin/docker-compose -f /home/prom/dockprom/docker-compose.yml up -d
+ExecStop=/usr/local/bin/docker-compose -f /home/prom/dockprom/docker-compose.yml down
+
+[Install]
+WantedBy=multi-user.target

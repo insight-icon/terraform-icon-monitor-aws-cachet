@@ -61,3 +61,12 @@ services:
 
 {% endif %}
 
+{% if enable_icon_network_exporter %}
+
+  icon_network_exporter:
+    image: insightinfrastructure/icon-network-exporter:v0.1.0
+    ports:
+      - "127.0.0.1:6100:6100"
+    restart: always
+
+{% endif %}

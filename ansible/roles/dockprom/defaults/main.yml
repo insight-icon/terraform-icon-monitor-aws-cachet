@@ -1,0 +1,10 @@
+---
+
+group_name: prom
+username: prom
+
+enable_prom_nginx: false
+
+gf_security_admin_user: admin
+gf_security_admin_password: changeme
+gf_users_allow_sign_up: false

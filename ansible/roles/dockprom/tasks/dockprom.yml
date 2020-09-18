@@ -1,0 +1,80 @@
+---
+
+- name: Create group
+  group:
+    name: "{{ group_name }}"
+    state: present
+
+- name: Add user
+  user:
+    name: "{{ username }}"
+    group: "{{ group_name }}"
+    append: yes
+
+- name: Add user to docker group
+  user:
+    name: "{{ username }}"
+    groups: docker
+    append: yes
+
+- name: check if dockprom exists
+  stat:
+    dest: "/home/{{ username }}/dockprom"
+  register: dockprom_git
+
+- name: clone dockprom
+  git:
+    repo: https://github.com/stefanprodan/dockprom
+    dest: "/home/{{ username }}/dockprom"
+  become_user: "{{ username }}"
+  become: "yes"
+  when: dockprom_git.stat.exists == false
+
+- name: Copy over the config file
+  template:
+    src: config.j2
+    dest: "/home/{{ username }}/dockprom/config"
+    mode: '0644'
+    owner: "{{ username }}"
+    group: "{{ group_name }}"
+
+- name: Copy over the alert rules file
+  template:
+    src: alert_rules.yml
+    dest: "/home/{{ username }}/dockprom/prometheus/alert_rules" # no yml
+    mode: '0644'
+    owner: "{{ username }}"
+    group: "{{ group_name }}"
+
+- name: Copy over the prometheus config file
+  template:
+    src: prometheus.yml
+    dest: "/home/{{ username }}/dockprom/prometheus/prometheus.yml"
+    mode: '0644'
+    owner: "{{ username }}"
+    group: "{{ group_name }}"
+
+- name: Copy over the alertmanager config file
+  template:
+    src: alertmanager_config.yml
+    dest: "/home/{{ username }}/dockprom/alertmanager/config.yml"
+    mode: '0644'
+    owner: "{{ username }}"
+    group: "{{ group_name }}"
+
+- name: Flush handlers in case any configs have changed.
+  meta: flush_handlers
+
+- name: Copy service
+  template:
+    src: dockprom.service.j2
+    dest: /etc/systemd/system/dockprom.service
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Enable and start service
+  systemd:
+    name: dockprom
+    enabled: yes
+    state: started

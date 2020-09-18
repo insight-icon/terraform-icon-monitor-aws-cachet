@@ -37,6 +37,10 @@ resource "aws_instance" "this" {
 
   iam_instance_profile = join("", aws_iam_instance_profile.this.*.id)
   key_name             = aws_key_pair.this.*.key_name[0]
+
+  tags = merge({
+    name = var.name
+  }, var.tags)
 }
 
 module "ansible" {

@@ -19,7 +19,7 @@
 
 - name: check if dockprom exists
   stat:
-    dest: "/home/{{ username }}/dockprom"
+    path: "/home/{{ username }}/dockprom"
   register: dockprom_git
 
 - name: clone dockprom

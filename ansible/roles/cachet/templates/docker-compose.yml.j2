@@ -37,11 +37,14 @@ services:
       - DB_PREFIX=chq_
 
       - CACHE_DRIVER=redis
+      - APP_KEY=${APP_KEY:-null}
 
       - SESSION_DOMAIN={{ fqdn }}
       - APP_DEBUG=false
       - DEBUG=false
     restart: on-failure
+    networks:
+      - web
 
 {% if db_host is not defined %}
 

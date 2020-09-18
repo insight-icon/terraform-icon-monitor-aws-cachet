@@ -43,12 +43,9 @@ No issue is creating limit on this module.
 | db\_password | the db password | `string` | n/a | yes |
 | db\_username | the db password | `string` | n/a | yes |
 | env\_file | Path to file for cachet | `string` | `""` | no |
-| environment | The environment | `string` | `""` | no |
+| force\_destroy | Force destroy the bucket with contents | `bool` | `true` | no |
 | hostname | hostname for A record - blank to not create record at all | `string` | `""` | no |
 | name | The name for the label | `string` | `"prep"` | no |
-| namespace | The namespace to deploy into | `string` | `"prod"` | no |
-| network\_name | The network name, ie kusama / mainnet | `string` | `"testnet"` | no |
-| owner | Owner of the infrastructure | `string` | `""` | no |
 | private\_key\_path | Path to the private ssh key | `string` | n/a | yes |
 | public\_key\_path | Public ssh key | `string` | n/a | yes |
 | root\_domain\_name | The root domain | `string` | `""` | no |

@@ -8,7 +8,10 @@ resource "aws_s3_bucket" "backend" {
   count  = var.create ? 1 : 0
   bucket = "logs-${data.aws_caller_identity.this.account_id}"
   acl    = "private"
-  tags   = var.tags
+
+  force_destroy = var.force_destroy
+
+  tags = var.tags
 }
 
 module "ami" {

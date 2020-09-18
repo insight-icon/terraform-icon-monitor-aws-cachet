@@ -4,6 +4,12 @@ variable "create" {
   default     = true
 }
 
+variable "force_destroy" {
+  description = "Force destroy the bucket with contents"
+  type        = bool
+  default     = true
+}
+
 variable "vpc_type" {
   description = "The type of vpc"
   type        = string
@@ -29,34 +35,10 @@ variable "name" {
   default     = "prep"
 }
 
-variable "environment" {
-  description = "The environment"
-  type        = string
-  default     = ""
-}
-
-variable "namespace" {
-  description = "The namespace to deploy into"
-  type        = string
-  default     = "prod"
-}
-
-variable "network_name" {
-  description = "The network name, ie kusama / mainnet"
-  type        = string
-  default     = "testnet"
-}
-
 variable "tags" {
   description = "Tags"
   default     = {}
   type        = map(string)
-}
-
-variable "owner" {
-  description = "Owner of the infrastructure"
-  type        = string
-  default     = ""
 }
 
 variable "private_key_path" {

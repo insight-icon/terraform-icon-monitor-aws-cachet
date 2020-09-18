@@ -1,6 +1,6 @@
 resource "aws_iam_role" "this" {
   count              = var.create ? 1 : 0
-  name               = "${module.label.name}Role${title(random_pet.this.id)}"
+  name               = "MonitorNodeRole${title(var.name)}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -17,13 +17,12 @@ resource "aws_iam_role" "this" {
 }
 EOF
 
-  tags = module.label.tags
+  tags = var.tags
 }
 
 resource "aws_iam_instance_profile" "this" {
   count = var.create ? 1 : 0
 
-  name = "${module.label.name}InstanceProfile${title(random_pet.this.id)}"
   role = join("", aws_iam_role.this.*.name)
 }
 
@@ -31,7 +30,6 @@ resource "aws_iam_instance_profile" "this" {
 resource "aws_iam_policy" "s3_put_logs_policy" {
   count = var.create ? 1 : 0
 
-  name   = "${module.label.name}S3PutLogsPolicy${title(random_pet.this.id)}"
   policy = <<-EOT
 {
     "Version": "2012-10-17",

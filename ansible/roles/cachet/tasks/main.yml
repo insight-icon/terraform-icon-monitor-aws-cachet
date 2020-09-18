@@ -100,4 +100,4 @@
     state: started
 
 - name: Generate key
-  script: sleep 5 && docker exec -i `docker ps -aqf "name=^cachet-docker_cachet*"` php artisan key:generate
+  command: sleep 5 && docker exec -i `docker ps -aqf "name=^cachet-docker_cachet*"` php artisan key:generate

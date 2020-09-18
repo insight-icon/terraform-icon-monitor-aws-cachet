@@ -38,7 +38,7 @@ resource "aws_iam_policy" "s3_put_logs_policy" {
           "Sid":"ReadWrite",
           "Effect":"Allow",
           "Action":["s3:GetObject", "s3:PutObject"],
-          "Resource":["arn:aws:s3:::${aws_s3_bucket.backend.*.bucket[0]}/*"]
+          "Resource":["arn:aws:s3:::${join("", aws_s3_bucket.backend.*.bucket)}/*"]
         }
     ]
 }
@@ -50,5 +50,5 @@ resource "aws_iam_role_policy_attachment" "s3_put_logs_policy" {
 
   role = join("", aws_iam_role.this.*.id)
 
-  policy_arn = aws_iam_policy.s3_put_logs_policy.*.arn[0]
+  policy_arn = join("", aws_iam_policy.s3_put_logs_policy.*.arn)
 }

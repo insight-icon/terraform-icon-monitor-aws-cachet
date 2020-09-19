@@ -10,5 +10,5 @@
             - "{{ fqdn }}"
       certbot_create_standalone_stop_services: []
 
-    - cachet
     - dockprom
+    - cachet

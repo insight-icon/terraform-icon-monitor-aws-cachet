@@ -6,17 +6,6 @@ networks:
 
 services:
 
-  redis:
-    image: 'bitnami/redis:latest'
-    ports:
-      - '6379'
-    env_file:
-      - .env
-    volumes:
-      - '.:/bitnami/redis/data'
-    networks:
-      - web
-
   cachet:
     build:
       context: .
@@ -54,7 +43,7 @@ services:
       - postgres
 
   postgres:
-    image: postgres:9.5
+    image: postgres:12-alpine
     volumes:
       - /var/lib/postgresql/data
     environment:

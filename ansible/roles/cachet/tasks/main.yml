@@ -99,5 +99,5 @@
     enabled: yes
     state: started
 
-- name: Generate key
-  command: sleep 5 && docker exec -i `docker ps -aqf "name=^cachet-docker_cachet*"` php artisan key:generate
+#- name: Generate key
+#  command: sleep 5 && docker exec -i `docker ps -aqf "name=^cachet-docker_cachet*"` php artisan key:generate

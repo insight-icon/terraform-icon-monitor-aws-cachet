@@ -95,15 +95,3 @@ resource "aws_route53_record" "www" {
   records = [join("", aws_instance.this.*.public_ip)]
 }
 
-//resource "aws_route53_record" "www" {
-//  count = var.root_domain_name != "" ? 1 : 0
-//
-//  zone_id = join("", data.aws_route53_zone.this.*.id)
-//  name    = "www"
-//  type    = "CNAME"
-//  ttl     = "5"
-//
-//  set_identifier = "dev"
-//  records        = join("", aws_route53_record.this.*.records)
-//}
-

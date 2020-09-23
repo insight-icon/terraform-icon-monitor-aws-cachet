@@ -1,3 +1,5 @@
+{% raw %}
+
 route:
   receiver: 'slack'
 
@@ -9,3 +11,5 @@ receivers:
         username: 'Prometheus'
         channel: '#<channel-name>'
         api_url: 'https://hooks.slack.com/services/<webhook-id>'
+  
+{% endraw %}

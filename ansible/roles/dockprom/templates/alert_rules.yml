@@ -1,3 +1,4 @@
+{% raw %}
 groups:
   - name: targets
     rules:
@@ -67,3 +68,5 @@ groups:
         annotations:
           summary: "Jenkins high memory usage"
           description: "Jenkins memory consumption is at {{ humanize $value}}."
+          
+{% endraw %}

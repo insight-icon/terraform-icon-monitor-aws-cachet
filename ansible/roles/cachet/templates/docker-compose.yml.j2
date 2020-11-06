@@ -25,7 +25,6 @@ services:
       - DB_PASSWORD={{ db_password | default('postgres') }}
       - DB_PREFIX=chq_
 
-      - CACHE_DRIVER=redis
       - APP_KEY=${APP_KEY:-null}
 
       - SESSION_DOMAIN={{ fqdn }}

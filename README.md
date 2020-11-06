@@ -45,6 +45,7 @@ No issue is creating limit on this module.
 | env\_file | Path to file for cachet | `string` | `""` | no |
 | force\_destroy | Force destroy the bucket with contents | `bool` | `true` | no |
 | hostname | hostname for A record - blank to not create record at all | `string` | `""` | no |
+| instance\_type | ... | `string` | `"t3.small"` | no |
 | name | The name for the label | `string` | `"prep"` | no |
 | private\_key\_path | Path to the private ssh key | `string` | n/a | yes |
 | public\_key\_path | Public ssh key | `string` | n/a | yes |

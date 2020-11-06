@@ -25,7 +25,7 @@ resource "aws_key_pair" "this" {
 resource "aws_instance" "this" {
   count         = var.create ? 1 : 0
   ami           = module.ami.ubuntu_1804_ami_id
-  instance_type = "t2.small"
+  instance_type = var.instance_type
 
   root_block_device {
     volume_size = 8

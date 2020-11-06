@@ -41,6 +41,13 @@ variable "tags" {
   type        = map(string)
 }
 
+
+variable "instance_type" {
+  description = "..."
+  type        = string
+  default     = "t3.small"
+}
+
 variable "private_key_path" {
   description = "Path to the private ssh key"
   type        = string
